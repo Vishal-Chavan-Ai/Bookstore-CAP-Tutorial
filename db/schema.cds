@@ -8,13 +8,14 @@ namespace my.bookstore;
 type StringText : String(255);
 
 entity Books : cuid, managed {
-        title  : StringText;
-        author : Association to Authors;
-        genre  : StringText;
+        title       : StringText;
+        author      : Association to Authors;
+        genre       : StringText;
         publishedAt : Date;
-        pages : Integer;
-        price : Decimal(9,2);
-        Chapters : Composition of many Chapters on Chapters.book = $self;
+        pages       : Integer;
+        price       : Decimal(9, 2);
+        Chapters    : Composition of many Chapters
+                              on Chapters.book = $self;
 }
 
 entity Authors : cuid, managed {
@@ -24,6 +25,8 @@ entity Authors : cuid, managed {
 }
 
 entity Chapters : cuid, managed {
-        number : Integer;
-        key book : Association to Books;
+        key book   : Association to Books;
+            number : Integer;
+            title  : StringText;
+            pages  : Integer;
 }
