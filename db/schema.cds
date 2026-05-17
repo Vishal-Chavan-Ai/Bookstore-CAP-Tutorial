@@ -10,6 +10,10 @@ type StringText : String(255);
 entity Books : cuid, managed {
         title  : StringText;
         author : Association to Authors;
+        genre  : StringText;
+        publishedAt : Date;
+        pages : Integer;
+        price : Decimal(9,2);
         Chapters : Composition of many Chapters on Chapters.book = $self;
 }
 
