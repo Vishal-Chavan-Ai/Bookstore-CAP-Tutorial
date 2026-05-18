@@ -4,8 +4,10 @@ using {my.bookstore as my} from '../db/schema';
 service BookstoreService {
     entity Books      as projection on my.Books
         actions {
+            @(Common.SideEffects: {TargetProperties: ['stock']})
             action addStock();
             action changePublishDate(newDate: Date);
+            @(Common.SideEffects: {TargetProperties: ['status_code']})
             action changeStatus( @(Common: {
                                      ValueListWithFixedValues: true,
                                      Label                   : 'New status',
