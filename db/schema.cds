@@ -11,7 +11,7 @@ type StringText     : String(255);
 entity Books : cuid, managed {
         title       : StringText;
         author      : Association to Authors;
-        genre       : StringText;
+        genre       : Association to Genres;
         publishedAt : Date;
         pages       : Integer;
         price       : Decimal(9, 2);
@@ -20,6 +20,24 @@ entity Books : cuid, managed {
         status      : Association to BookStatus;
         Chapters    : Composition of many Chapters
                               on Chapters.book = $self;
+}
+
+entity Genres {
+        key code        : Genre;
+            description : StringText;
+}
+
+type Genre          : String enum {
+        Fiction = 'Fiction';
+        Science = 'Science';
+        Cooking = 'Cooking';
+        Fantasy = 'Fantasy';
+        Hobby = 'Hobby';
+        Adventure = 'Adventure';
+        SelfHelp = 'Self-Help';
+        NonFiction = 'Non-Fiction';
+        Art = 'Art';
+        Children = 'Children';
 }
 
 entity BookStatus {
