@@ -24,6 +24,9 @@ service BookstoreService {
                                  newStatus: String)
         }
 
+    @(Common.SideEffects: {TargetEntities: ['/BookstoreService.EntityContainer/Books']})
+    action addDiscount();
+    
     entity Authors    as projection on my.Authors;
     entity Chapters   as projection on my.Chapters;
     entity BookStatus as projection on my.BookStatus;

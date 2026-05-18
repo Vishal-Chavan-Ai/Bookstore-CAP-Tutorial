@@ -6,6 +6,10 @@ const cds = require('@sap/cds')
 module.exports = class BookstoreService extends cds.ApplicationService {
     init() {
 
+        this.on('addDiscount', async (req) => {
+            await UPDATE(Books).set({ price: { func: 'ROUND', args: [{ xpr: [{ ref: ['price'] }, '*', { val: 0.9 }] }, { val: 2 }] } })
+        })
+
         this.on('addStock', Books, async (req) => {
             const bookId = req.params[0].ID
             await UPDATE(Books)
